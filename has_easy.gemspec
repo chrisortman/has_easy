@@ -5,13 +5,13 @@
 
 Gem::Specification.new do |s|
   s.name = %q{has_easy}
-  s.version = "0.9.0"
+  s.version = "1.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Jeff Wigal"]
-  s.date = %q{2012-03-28}
-  s.description = %q{TODO: longer description of your gem}
-  s.email = %q{jeff@assignr.com}
+  s.authors = ["Jeff Wigal","Chris Ortman"]
+  s.date = %q{2014-12-02}
+  s.description = %q{Allows you to store a series of values in a tabluar format. Avoids schema changes for adding a new field.}
+  s.email = %q{chrisortman@gmail.com}
   s.extra_rdoc_files = [
     "README",
     "README.rdoc"
@@ -38,11 +38,11 @@ Gem::Specification.new do |s|
     "lib/tasks/has_easy_tasks.rake",
     "test/test_has_easy.rb"
   ]
-  s.homepage = %q{http://github.com/jwigal/has_easy}
+  s.homepage = %q{http://github.com/chrisortman/has_easy}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.5.2}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.rubygems_version = %q{2.2.2}
+  s.summary = %q{Avoid schema changes for new fields}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

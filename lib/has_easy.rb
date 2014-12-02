@@ -65,9 +65,9 @@ module Izzle
         # if thing already exists, update it, otherwise add a new one
         thing = things.detect{ |thing| thing.name == name }
         if thing.blank?
-          thing = HasEasyThing.new :context => context,
+          thing = HasEasyThing.new(:context => context,
                                    :name => name,
-                                   :value => value
+                                   :value => value)
           thing.model = self
           #thing.set_model_target(self) # for the bug regarding thing's validation trying to invoke the 'model' assocation when self is a new record
           send("#{context}").send("<<", thing)

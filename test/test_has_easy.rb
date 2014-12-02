@@ -1,15 +1,14 @@
-require 'test/unit'
-
-require 'rubygems'
+require 'minitest/unit'
+require 'minitest/autorun'
 require 'active_record'
+require 'has_easy'
 
-$:.unshift File.dirname(__FILE__) + '/../lib'
-require File.dirname(__FILE__) + '/../init'
+# $:.unshift File.dirname(__FILE__) + '/../lib'
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 
-# AR keeps printing annoying schema statements
-$stdout = StringIO.new
+# # AR keeps printing annoying schema statements
+# $stdout = StringIO.new
 
 def setup_db
   ActiveRecord::Base.logger
@@ -41,12 +40,12 @@ class HasEasyClientTest < ActiveRecord::Base
   has_easy :flags do |f|
     f.define :default_through_test_1, :default => 'client default'
   end
-  
-  
+
+
   def self.default_array
     [1,2,3]
   end
-  
+
 end
 
 class HasEasyUserTest < ActiveRecord::Base
@@ -90,7 +89,7 @@ class HasEasyUserTest < ActiveRecord::Base
   end
 end
 
-class HasEasyTest < Test::Unit::TestCase
+class HasEasyTest < MiniTest::Unit::TestCase
   
   def setup
     setup_db
@@ -168,7 +167,7 @@ class HasEasyTest < Test::Unit::TestCase
     assert @user.preferences.save
     
     @user.preferences.theme = 1
-    assert_raise(ActiveRecord::RecordInvalid){ @user.preferences.save! }
+    assert_raises(ActiveRecord::RecordInvalid){ @user.preferences.save! }
     
     assert !@user.preferences.save
     assert !@user.errors.empty?
@@ -183,7 +182,7 @@ class HasEasyTest < Test::Unit::TestCase
     assert @user.preferences.save
     
     @user.preferences.validate_test_1 = false
-    assert_raise(ActiveRecord::RecordInvalid){ @user.preferences.save! }
+    assert_raises(ActiveRecord::RecordInvalid){ @user.preferences.save! }
     assert !@user.preferences.save
     assert !@user.errors.empty?
   end
@@ -197,7 +196,7 @@ class HasEasyTest < Test::Unit::TestCase
     assert @user.preferences.save
     
     @user.preferences.validate_test_2 = false
-    assert_raise(ActiveRecord::RecordInvalid){ @user.preferences.save! }
+    assert_raises(ActiveRecord::RecordInvalid){ @user.preferences.save! }
     assert !@user.preferences.save
     assert !@user.errors.empty?
   end
@@ -211,14 +210,14 @@ class HasEasyTest < Test::Unit::TestCase
     assert @user.preferences.save
     
     @user.preferences.validate_test_3 = false
-    assert_raise(ActiveRecord::RecordInvalid){ @user.preferences.save! }
+    assert_raises(ActiveRecord::RecordInvalid){ @user.preferences.save! }
     assert !@user.preferences.save
     assert !@user.errors.empty?
   end
   
   def test_validate_4
     @user.preferences.validate_test_4 = "blah"
-    assert_raise(ActiveRecord::RecordInvalid){ @user.preferences.save! }
+    assert_raises(ActiveRecord::RecordInvalid){ @user.preferences.save! }
     assert !@user.preferences.save
     assert 2, @user.errors.get(:preferences).length
     assert '1one', @user.errors.get(:preferences)[0]

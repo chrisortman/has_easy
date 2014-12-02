@@ -38,12 +38,12 @@ class HasEasyThing < ActiveRecord::Base
   end
   
   def value=(v)
-    method_missing(:value=, v.to_yaml)
+    write_attribute(:value, v.to_yaml)
     self.value_cache = v
   end
   
   def value
-    self.value_cache ||= YAML.load(method_missing(:value))
+    self.value_cache ||= YAML.load(read_attribute(:value))
   end
   
 end

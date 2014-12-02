@@ -10,6 +10,8 @@ group :development do
   gem "jeweler", "~> 1.6.4"
   gem "simplecov", ">= 0"
   gem "sqlite3-ruby", :require => 'sqlite3'
+  gem 'minitest'
+  gem 'debugger'
 end
 
 gem "rails", "3.2.19"
